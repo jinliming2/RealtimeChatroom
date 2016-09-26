@@ -6,16 +6,18 @@
 let webSocketServer = require('websocket').server;
 let http = require('http');
 let util = require('./controller/util');
+let users = require('./controller/user');
 
 process.title = 'Realtime Chatroom - WebSocket - Node.JS';
 let port = util.normalizePort(process.env.PORT || '3000');
 
 let clients = [];
+let recentMessages = [];
 
 //HTTP Server
-let httpServer = http.createServer(function(request, response) {
+let httpServer = http.createServer((request, response) => {
 });
-httpServer.listen(port, function() {
+httpServer.listen(port, () => {
     util.logger('D', 'Server is listening on *:' + port);
 });
 
@@ -23,20 +25,33 @@ httpServer.listen(port, function() {
 let wsServer = new webSocketServer({
     httpServer: httpServer
 });
-wsServer.on('request', function(request) {
+wsServer.on('request', (request) => {
     util.logger('D', 'New client connected: ' + request.origin);
-    let connection = request.accept(null, request.origin);
 
-    let index = clients.push(connection) - 1;
-
-    util.logger('D', 'Connection accepted');
-
-    connection.on('message', function(message) {
-        if (message.type === 'utf8') { // accept only text
+    //Log in
+    let {username, password} = request.resourceURL.query;
+    //Check username and password
+    users.validate(username, password, (result) => {
+        //Reject
+        if(result === false) {
+            request.reject(401, 'Username or password error!');
+            util.logger('D', 'Connection rejected');
+            return;
         }
-    });
 
-    connection.on('close', function(connection) {
-        clients.splice(index, 1);
+        //Accept
+        let connection = request.accept(null, request.origin);
+        let index = clients.push(connection) - 1;
+        util.logger('D', 'Connection accepted');
+
+        connection.on('message', (message) => {
+            if (message.type === 'utf8') {
+            }
+        });
+
+        connection.on('close', (code, message) => {
+            util.logger('D', message);
+            clients.splice(index, 1);
+        });
     });
 });

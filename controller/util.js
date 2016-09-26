@@ -7,7 +7,7 @@
  * @param str
  * @return {string}
  */
-module.exports.htmlEntities = function(str) {
+module.exports.htmlEntities = (str) => {
     return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -19,7 +19,7 @@ module.exports.htmlEntities = function(str) {
  * @param val
  * @return {*}
  */
-module.exports.normalizePort = function(val) {
+module.exports.normalizePort = (val) => {
     let port = parseInt(val, 10);
     if(port >= 0) {
         // port number
@@ -34,7 +34,7 @@ module.exports.normalizePort = function(val) {
  * @param {string|number} fill
  * @return {string}
  */
-module.exports.formatWidth = function(text, length, fill) {
+module.exports.formatWidth = (text, length, fill) => {
     text = text.toString();
     if(text.length >= length) {
         return text;
@@ -51,7 +51,7 @@ module.exports.formatWidth = function(text, length, fill) {
  * @param {string} type
  * @param {*} content
  */
-module.exports.logger = function(type, content) {
+module.exports.logger = (type, content) => {
     let fun;
     switch(type) {
         case 'd':
@@ -81,5 +81,5 @@ module.exports.logger = function(type, content) {
     date = f(date.getFullYear(), 4, 0) + '-' + f(date.getMonth() + 1, 2, 0) + '-' + f(date.getDate(), 2, 0)
         + ' ' + f(date.getHours(), 2, 0) + ':' + f(date.getMinutes(), 2, 0) + ':' + f(date.getSeconds(), 2, 0)
         + '.' + f(date.getMilliseconds(), 3, 0);
-    fun('[' + date + '] ' + content);
+    fun('[' + date + '] ', content);
 };
