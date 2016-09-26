@@ -1,0 +1,31 @@
+{
+  "name": "realtime_chatroom",
+  "version": "0.1.0",
+  "description": "A realtime chatroom service based on websocket, written in Javascript and run with Node.JS.",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/772807886/RealtimeChatroom.git"
+  },
+  "keywords": [
+    "WebSocket",
+    "HTML5",
+    "Chatroom",
+    "JavaScript",
+    "Node.JS"
+  ],
+  "author": "Liming Jin <jinliming2@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/772807886/RealtimeChatroom/issues"
+  },
+  "homepage": "https://github.com/772807886/RealtimeChatroom#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
+}
