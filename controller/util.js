@@ -51,7 +51,7 @@ module.exports.formatWidth = (text, length, fill) => {
  * @param {string} type
  * @param {*} content
  */
-module.exports.logger = (type, content) => {
+module.exports.logger = (type, ...content) => {
     let fun;
     switch(type) {
         case 'e':
@@ -82,5 +82,5 @@ module.exports.logger = (type, content) => {
     date = f(date.getFullYear(), 4, 0) + '-' + f(date.getMonth() + 1, 2, 0) + '-' + f(date.getDate(), 2, 0)
         + ' ' + f(date.getHours(), 2, 0) + ':' + f(date.getMinutes(), 2, 0) + ':' + f(date.getSeconds(), 2, 0)
         + '.' + f(date.getMilliseconds(), 3, 0);
-    fun('[' + date + '] ', content);
+    fun('[' + date + '] ', ...content);
 };
