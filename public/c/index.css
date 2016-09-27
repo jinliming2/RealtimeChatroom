@@ -1,0 +1,137 @@
+header {
+    height: 60px;
+    background-color: #004000;
+    text-align: center;
+    color: #00e500;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+header small {
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+article {
+    height: calc(100% - 80px);
+}
+
+#messages {
+    height: calc(100% - 40px);
+    padding: 0 calc((100% - 800px) / 2);
+    background-color: #eeffee;
+}
+
+.tip {
+    display: flex;
+    justify-content: center;
+}
+
+.tip > div {
+    background-color: rgba(80, 180, 80, .5);
+    padding: 2px 8px;
+    margin: 8px 0;
+    border-radius: 5px;
+    text-align: center;
+    user-select: initial;
+    cursor: initial;
+}
+
+.message {
+    margin: 8px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.saved {
+    flex-direction: row;
+}
+
+.sent {
+    flex-direction: row-reverse;
+}
+
+.message > div {
+    background-color: #004000;
+    padding: 8px;
+    color: #00e500;
+    font-size: 18px;
+    user-select: initial;
+    cursor: initial;
+    border-radius: 8px;
+}
+
+.message > img {
+    width: 60px;
+    height: 60px;
+}
+
+.message > .triangle {
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 8px solid transparent;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    bottom: -10px;
+    border-radius: 0;
+}
+
+.saved > .triangle {
+    border-right-color: #004000;
+}
+
+.sent > .triangle {
+    border-left-color: #004000;
+}
+
+#input {
+    height: 40px;
+    background-color: #007f00;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 700px;
+    border: none;
+    height: 30px;
+    padding: 0 8px;
+    margin: 0 4px;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    width: 60px;
+    border: none;
+    height: 30px;
+    margin: 0 4px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #449d44;
+}
+
+footer {
+    height: 20px;
+    background-color: #004000;
+    color: #00e500;
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+footer a {
+    color: #00e500;
+}
