@@ -10,5 +10,5 @@ sudo: false
 services:
     - mongodb
 
-script:
+after_script:
     - npm run travis-ci

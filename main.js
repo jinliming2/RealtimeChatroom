@@ -14,6 +14,10 @@ const MESSAGE_TYPE = {
     RECENT_MESSAGE: {
         code: 0,
         message: 'recent messages'
+    },
+    CLIENT_EXIT: {
+        code: 1,
+        message: 'client exit'
     }
 };
 
@@ -21,6 +25,16 @@ process.title = 'Realtime Chatroom - WebSocket - Node.JS';
 let port = util.normalizePort(process.env.PORT || '3000');
 
 let clients = [];
+
+/**
+ * Broadcast message to each client
+ * @param {string} message
+ */
+let broadcast = function(message) {
+    for(let client of clients) {
+        client.connect.sendUTF(message);
+    }
+};
 
 //HTTP Server
 let httpServer = http.createServer((request, response) => {
@@ -54,7 +68,10 @@ wsServer.on('request', (request) => {
 
         //Accept
         let connection = request.accept(null, request.origin);
-        let index = clients.push(connection) - 1;
+        let index = clients.push({
+                connect: connection,
+                info: result
+            }) - 1;
         util.logger('D', index + ' Connection accepted');
 
         //Send recent messages
@@ -67,13 +84,20 @@ wsServer.on('request', (request) => {
         util.logger('D', index + ' Sent recent messages');
 
         connection.on('message', (message) => {
-            if (message.type === 'utf8') {
+            if(message.type == 'utf8') {
             }
         });
 
         connection.on('close', (code, message) => {
             util.logger('D', index + ' ' + message);
+            let info = clients[index].info;
             clients.splice(index, 1);
+            broadcast(JSON.stringify({
+                code: 0,
+                type: MESSAGE_TYPE.CLIENT_EXIT.code,
+                message: MESSAGE_TYPE.CLIENT_EXIT.message,
+                data: info
+            }));
         });
     });
 });
