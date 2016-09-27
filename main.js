@@ -56,12 +56,11 @@ wsServer.on('request', (request) => {
     //Check username and password
     users.validate(username, password, (result) => {
         //Reject
-        //TODO: Auth
-        // if(result === false) {
-        //     request.reject(401, 'Username or password error!');
-        //     util.logger('D', 'Connection rejected');
-        //     return;
-        // }
+        if(result === false) {
+            request.reject(401, 'Username or password error!');
+            util.logger('D', 'Connection rejected');
+            return;
+        }
         util.logger('D', 'Validated User: ' + username);
 
         //Accept

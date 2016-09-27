@@ -6,6 +6,7 @@
 let express = require('express');
 let app = express();
 let http = require('http');
+var bodyParser = require('body-parser');
 let util = require('./util');
 
 let port = util.normalizePort(process.env.PORT || '3000');
@@ -17,6 +18,8 @@ let httpServer = http.createServer(app);
 //View Engine
 app.set('view engine', 'ejs');
 app.set('views', './view');
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //Public resources root
 app.use(express.static('./public'));

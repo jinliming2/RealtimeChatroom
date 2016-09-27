@@ -35,3 +35,40 @@ module.exports.validate = (username, password, result) => {
         }
     });
 };
+
+/**
+ * Register
+ * @param {string} username
+ * @param {string} password
+ * @param {string} name
+ * @param {string} head
+ * @param {Function} result
+ */
+module.exports.register = (username, password, name, head, result) => {
+    users.findOne({
+        username: username
+    }, (error, data) => {
+        if(error) {
+            util.logger('E', error);
+            result(false);
+        } else if(data) {
+            result({code: -1, message: 'Username exists!'});
+        } else {
+            new users({
+                username: username,
+                password: password,
+                name: name,
+                head: head
+            }).save((error, data) => {
+                if(error) {
+                    util.logger('E', error);
+                    result(false);
+                } else if(data) {
+                    result({code: 0, message: 'success'});
+                } else {
+                    result(false);
+                }
+            });
+        }
+    });
+};

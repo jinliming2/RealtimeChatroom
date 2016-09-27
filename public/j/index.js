@@ -77,7 +77,7 @@
 
     //Login
     buttonLog.addEventListener("click", () => {
-        if(config.sender == null) {
+        if(config.user == null) {
             if(config.connection) {
                 config.connection.close();
             }
@@ -115,7 +115,7 @@
                     config.connection = new WebSocket("ws://" + location.hostname + ":" + location.port + "/?username=" + txtUsername.value + "&password=" + txtPassword.value);
                     config.connection.onclose = onclose;
                     config.connection.onerror = () => {
-                        alert("Connect Failed!\n1. Place check your username and password!\n2. Place check your network");
+                        alert("Connect Failed!\n1. Place check your username and password!\n2. Place check your network!");
                         config.connection = null;
                     };
                     config.connection.onmessage = onmessage;
