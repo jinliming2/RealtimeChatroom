@@ -4,7 +4,7 @@
 "use strict";
 //Module dependencies
 let webSocketServer = require('websocket').server;
-let http = require('http');
+let httpServer = require('./controller/httpServer');
 let util = require('./controller/util');
 let users = require('./controller/user');
 let recentMessage = new (require('./controller/recentMessage').recentMessage)();
@@ -26,7 +26,6 @@ const MESSAGE_TYPE = {
 };
 
 process.title = 'Realtime Chatroom - WebSocket - Node.JS';
-let port = util.normalizePort(process.env.PORT || '3000');
 
 let clients = [];
 
@@ -44,16 +43,6 @@ let broadcast = function(message) {
         }
     }
 };
-
-//HTTP Server
-let httpServer = http.createServer((request, response) => {
-    response.write("{code: 0, message: 'success'}");
-    response.end();
-    response.destroy();
-});
-httpServer.listen(port, () => {
-    util.logger('D', 'Server is listening on *:' + port);
-});
 
 //WebSocket Server
 let wsServer = new webSocketServer({
