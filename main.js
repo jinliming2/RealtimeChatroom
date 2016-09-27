@@ -77,6 +77,7 @@ wsServer.on('request', (request) => {
             code: 0,
             type: MESSAGE_TYPE.RECENT_MESSAGE.code,
             message: MESSAGE_TYPE.RECENT_MESSAGE.message,
+            user: result,
             data: recentMessage.getRecents()
         }));
         util.logger('D', index, '(' + result.name + ')', 'Sent recent messages');
