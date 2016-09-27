@@ -64,7 +64,7 @@ module.exports.register = (username, password, name, head, result) => {
                     util.logger('E', error);
                     result(false);
                 } else if(data) {
-                    result({code: 0, message: 'success'});
+                    result({code: 0, message: 'success', data: data._doc});
                 } else {
                     result(false);
                 }

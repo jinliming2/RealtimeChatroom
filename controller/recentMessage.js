@@ -32,12 +32,12 @@ class recentMessage {
         if(this._messages.length < this.maximum) {
             return Array.from(this._messages);
         }
-        let flag = false;
+        let flag = true;
         let _new = [];
-        for(let i = this._index; i != this._index && flag; i++) {
+        for(let i = this._index; i != this._index || flag; i++) {
             if(i >= this.maximum) {
                 i = 0;
-                flag = true;
+                flag = false;
             }
             _new.push(this._messages[i]);
         }
