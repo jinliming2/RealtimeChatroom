@@ -61,3 +61,81 @@ describe('formatWidth', () => {
         assert.equal(test.formatWidth(789, 3, "0"), "789");
     });
 });
+
+describe('logger', () => {
+    it('e', () => {
+        assert.doesNotThrow(() => {
+            test.logger("e", "e");
+        });
+    });
+    it('E', () => {
+        assert.doesNotThrow(() => {
+            test.logger("E", "E");
+        });
+    });
+    it('error', () => {
+        assert.doesNotThrow(() => {
+            test.logger("error", "error");
+        });
+    });
+    it('Error', () => {
+        assert.doesNotThrow(() => {
+            test.logger("Error", "Error");
+        });
+    });
+    it('ERROR', () => {
+        assert.doesNotThrow(() => {
+            test.logger("ERROR", "ERROR");
+        });
+    });
+    it('w', () => {
+        assert.doesNotThrow(() => {
+            test.logger("w", "w");
+        });
+    });
+    it('W', () => {
+        assert.doesNotThrow(() => {
+            test.logger("W", "W");
+        });
+    });
+    it('warning', () => {
+        assert.doesNotThrow(() => {
+            test.logger("warning", "warning");
+        });
+    });
+    it('Warning', () => {
+        assert.doesNotThrow(() => {
+            test.logger("Warning", "Warning");
+        });
+    });
+    it('WARNING', () => {
+        assert.doesNotThrow(() => {
+            test.logger("WARNING", "WARNING");
+        });
+    });
+    it('d', () => {
+        assert.doesNotThrow(() => {
+            test.logger("d", "d");
+        });
+    });
+    it('D', () => {
+        assert.doesNotThrow(() => {
+            test.logger("D", "D");
+        });
+    });
+    it('debug', () => {
+        assert.doesNotThrow(() => {
+            test.logger("debug", "debug");
+        });
+    });
+    it('Debug', () => {
+        assert.doesNotThrow(() => {
+            test.logger("Debug", "Debug");
+        });
+    });
+    it('DEBUG', () => {
+        assert.doesNotThrow(() => {
+            test.logger("DEBUG", "DEBUG");
+        });
+    });
+});
