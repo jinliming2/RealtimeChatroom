@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "mocha",
-    "start": "node main.js"
+    "start": "node main.js",
+    "travis-ci": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,10 @@
   "homepage": "https://github.com/772807886/RealtimeChatroom#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.0.2"
+    "coveralls": "^2.11.14",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0"
   },
   "dependencies": {
     "mongoose": "^4.6.1",

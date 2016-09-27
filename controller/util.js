@@ -54,26 +54,27 @@ module.exports.formatWidth = (text, length, fill) => {
 module.exports.logger = (type, content) => {
     let fun;
     switch(type) {
-        case 'd':
-        case 'D':
-        case 'debug':
-        case 'Debug':
-        case 'DEBUG':
-            fun = console.log;
-            break;
         case 'e':
         case 'E':
         case 'error':
         case 'Error':
         case 'ERROR':
-            fun = content.error;
+            fun = console.error;
             break;
         case 'w':
         case 'W':
         case 'warning':
         case 'Warning':
         case 'WARNING':
-            fun = content.warn;
+            fun = console.warn;
+            break;
+        case 'd':
+        case 'D':
+        case 'debug':
+        case 'Debug':
+        case 'DEBUG':
+        default:
+            fun = console.log;
             break;
     }
     let date = new Date();
