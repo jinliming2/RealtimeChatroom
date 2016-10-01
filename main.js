@@ -65,7 +65,13 @@ wsServer.on('request', (request) => {
             util.logger('D', 'Connection rejected');
             return;
         }
-        util.logger('D', 'Validated User: ' + username);
+        for(let client of clients) {
+            if(client && client.info.username == username) {
+                client.connect.close();
+                util.logger('D', 'Closed connection: ' + username);
+            }
+        }
+        util.logger('D', 'Validated User: ' + username + '(' + result.name + ')');
 
         broadcast({
             code: 0,
@@ -113,7 +119,7 @@ wsServer.on('request', (request) => {
         });
 
         connection.on('close', (code, message) => {
-            util.logger('D', index, '(' + result.name + ')', message);
+            util.logger('D', index, '(' + result.name + ')', code, message);
             let info = clients[index].info;
             clients[index] = null;
             broadcast({

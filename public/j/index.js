@@ -57,7 +57,16 @@
     });
 
     //WebSocket Event
-    let onclose = () => {};
+    let onclose = () => {
+        config.connection.close();
+        config.connection = null;
+        config.user = null;
+        buttonSend.disabled = "disabled";
+        input.disabled = "disabled";
+        buttonLog.innerHTML = "LogIn";
+        buttonLog.dataset.e = "in";
+        addMessage(null, 'Connection closed!');
+    };
     let onerror = (e) => {
         console.error(e);
     };
