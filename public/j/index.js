@@ -33,7 +33,7 @@
 
     let divPinBottom = document.getElementById("pinBottom");
     let divMessages = document.getElementById("messages");
-    let input = document.querySelector("input");
+    let input = document.querySelector("textarea");
     let buttonSend = document.querySelector("button[type=submit]");
     let buttonLog = document.querySelector("button[type=button]");
 
@@ -149,7 +149,16 @@
                 window.open("/register.html");
             });
 
+            let submitEvent = (e) => {
+                if(e.keyCode == 13) {
+                    button.click();
+                }
+            };
+            txtUsername.addEventListener("keydown", submitEvent);
+            txtPassword.addEventListener("keydown", submitEvent);
+
             document.body.appendChild(loginDiv);
+            txtUsername.focus();
         } else if(config.connection) {
             config.connection.close();
             config.connection = null;
@@ -212,7 +221,9 @@
             msg.appendChild(content);
         }
         divMessages.appendChild(msg);
-        mouseScrollEvent({deltaY: 1});
+        if(config.pin) {
+            divMessages.scrollTop = divMessages.scrollHeight;
+        }
     };
 
     //Send message
@@ -221,5 +232,18 @@
             config.connection.send(input.value);
         }
         input.value = "";
+    });
+
+    //Submit event
+    input.addEventListener("keydown", (e) => {
+        if(e.keyCode == 13) {
+            if(e.ctrlKey || e.shiftKey) {
+                let s = input.selectionStart;
+                input.value = input.value.substr(0, s) + "\n" + input.value.substr(s);
+            } else {
+                e.preventDefault();
+                buttonSend.click();
+            }
+        }
     });
 })();

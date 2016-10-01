@@ -12,7 +12,8 @@ module.exports.htmlEntities = (str) => {
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/\r(\n)?|\n(\r)?/g, '<br>');
 };
 /**
  * Normalize a port into a number, string, or false.

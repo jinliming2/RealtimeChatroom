@@ -19,7 +19,6 @@ A realtime chatroom service based on websocket, written in Javascript(ES6) and r
 git clone https://github.com/772807886/RealtimeChatroom.git
 cd RealtimeChatroom
 ```
-
 * Secondly, Restore dependency modules.
 ```
 npm install
@@ -31,7 +30,6 @@ npm install
 > *See Also: [https://github.com/nodejs/node-gyp/issues/802#issuecomment-232865395](https://github.com/nodejs/node-gyp/issues/802#issuecomment-232865395)*
 
 * Thirdly, Make sure your MongoDB server was running.
-
 * Fourthly(Optional), Make a test for this project.
 ```
 npm test
@@ -40,11 +38,8 @@ OR test with coverage report.
 ```
 npm run cov
 ```
-
 * Fifthly, Run project.
 ```
 npm start
 ```
 This will listen on port 3000, then you can open your browser, and visit [http://[::1]:3000](http://[::1]:3000)(IPv6 address) or [http://127.0.0.1:3000](http://127.0.0.1)(IPv4 address).
-
-

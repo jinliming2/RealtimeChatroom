@@ -111,7 +111,7 @@ article {
     align-items: center;
 }
 
-input {
+input, textarea {
     width: 650px;
     border: none;
     height: 30px;
@@ -119,6 +119,7 @@ input {
     margin: 0 4px;
     border-radius: 5px;
     outline: none;
+    resize: none;
 }
 
 button {
