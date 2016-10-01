@@ -22,6 +22,10 @@ const MESSAGE_TYPE = {
     MESSAGE: {
         code: 2,
         message: 'message'
+    },
+    CLIENT_ENTER: {
+        code: 3,
+        message: 'client enter'
     }
 };
 
@@ -62,6 +66,13 @@ wsServer.on('request', (request) => {
             return;
         }
         util.logger('D', 'Validated User: ' + username);
+
+        broadcast({
+            code: 0,
+            type: MESSAGE_TYPE.CLIENT_ENTER.code,
+            message: MESSAGE_TYPE.CLIENT_ENTER.message,
+            data: result
+        });
 
         //Accept
         let connection = request.accept(null, request.origin);

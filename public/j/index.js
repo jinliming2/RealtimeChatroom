@@ -24,6 +24,10 @@
         MESSAGE: {
             code: 2,
             message: 'message'
+        },
+        CLIENT_ENTER: {
+            code: 3,
+            message: 'client enter'
         }
     };
 
@@ -71,6 +75,9 @@
                 break;
             case MESSAGE_TYPE.MESSAGE.code:
                 addMessage(data.data.sender, data.data.content, data.data._t);
+                break;
+            case MESSAGE_TYPE.CLIENT_ENTER.code:
+                addMessage(null, data.data.name + " joined!");
                 break;
         }
     };
@@ -158,7 +165,8 @@
             let div = document.createElement("div");
             div.innerHTML = message;
             msg.appendChild(div);
-        } else {
+        } else if(time > config.last) {
+            config.last = time;
             let t = new Date(time);
             let _time = {
                 year: t.getFullYear().toString(),
@@ -195,6 +203,7 @@
             msg.appendChild(content);
         }
         divMessages.appendChild(msg);
+        mouseScrollEvent({deltaY: 1});
     };
 
     //Send message
