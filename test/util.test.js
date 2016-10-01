@@ -18,6 +18,12 @@ describe('htmlEntities', () => {
             'A programmer said: &quot;PHP is the best programming language in the world!&quot;'
         );
     });
+    it('First Line\\nSecond Line\\rThird Line\\r\\nFourth Line\\n\\r => First Line<br>Second Line<br>Third Line<br>Fourth Line<br>', () => {
+        assert.equal(
+            test.htmlEntities('First Line\nSecond Line\rThird Line\r\nFourth Line\n\r'),
+            'First Line<br>Second Line<br>Third Line<br>Fourth Line<br>'
+        );
+    });
 });
 
 describe('normalizePort', () => {
