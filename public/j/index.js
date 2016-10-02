@@ -121,12 +121,16 @@
             let register = document.createElement("button");
             register.type = "submit";
             register.innerHTML = "Reg";
+            let cancel = document.createElement("button");
+            cancel.dataset.e = "out";
+            cancel.innerHTML = "Cancel";
             from.appendChild(txtUsername);
             from.appendChild(document.createElement("br"));
             from.appendChild(txtPassword);
             from.appendChild(document.createElement("br"));
             from.appendChild(button);
             from.appendChild(register);
+            from.appendChild(cancel);
             loginDiv.appendChild(from);
 
             button.addEventListener("click", () => {
@@ -156,6 +160,9 @@
             });
             register.addEventListener("click", () => {
                 window.open("/register.html");
+            });
+            cancel.addEventListener("click", () => {
+                document.body.removeChild(loginDiv);
             });
 
             let submitEvent = (e) => {
