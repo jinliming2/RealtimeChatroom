@@ -26,12 +26,17 @@ const MESSAGE_TYPE = {
     CLIENT_ENTER: {
         code: 3,
         message: 'client enter'
+    },
+    CLIENT_COUNT: {
+        code: 4,
+        message: 'client count'
     }
 };
 
 process.title = 'Realtime Chatroom - WebSocket - Node.JS';
 
 let clients = [];
+let clientCount = 0;
 
 /**
  * Broadcast message to each client
@@ -88,6 +93,14 @@ wsServer.on('request', (request) => {
             }) - 1;
         util.logger('D', index, '(' + result.name + ')', 'Connection accepted');
 
+        clientCount++;
+        broadcast({
+            code: 0,
+            type: MESSAGE_TYPE.CLIENT_COUNT.code,
+            message: MESSAGE_TYPE.CLIENT_COUNT.message,
+            data: clientCount
+        });
+
         //Send recent messages
         connection.sendUTF(JSON.stringify({
             code: 0,
@@ -127,6 +140,13 @@ wsServer.on('request', (request) => {
                 type: MESSAGE_TYPE.CLIENT_EXIT.code,
                 message: MESSAGE_TYPE.CLIENT_EXIT.message,
                 data: info
+            });
+            clientCount--;
+            broadcast({
+                code: 0,
+                type: MESSAGE_TYPE.CLIENT_COUNT.code,
+                message: MESSAGE_TYPE.CLIENT_COUNT.message,
+                data: clientCount
             });
         });
     });

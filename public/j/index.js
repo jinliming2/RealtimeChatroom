@@ -28,6 +28,10 @@
         CLIENT_ENTER: {
             code: 3,
             message: 'client enter'
+        },
+        CLIENT_COUNT: {
+            code: 4,
+            message: 'client count'
         }
     };
 
@@ -36,6 +40,7 @@
     let input = document.querySelector("textarea");
     let buttonSend = document.querySelector("button[type=submit]");
     let buttonLog = document.querySelector("button[type=button]");
+    let clientCount = document.getElementById("count");
 
     //Scroll Pin
     divPinBottom.style.display = "none";
@@ -66,6 +71,7 @@
         buttonLog.innerHTML = "LogIn";
         buttonLog.dataset.e = "in";
         addMessage(null, 'Connection closed!');
+        clientCount.innerHTML = 0;
     };
     let onerror = (e) => {
         console.error(e);
@@ -87,6 +93,9 @@
                 break;
             case MESSAGE_TYPE.CLIENT_ENTER.code:
                 addMessage(null, data.data.name + " joined!");
+                break;
+            case MESSAGE_TYPE.CLIENT_COUNT.code:
+                clientCount.innerHTML = data.data;
                 break;
         }
     };
@@ -167,6 +176,7 @@
             input.disabled = "disabled";
             buttonLog.innerHTML = "LogIn";
             buttonLog.dataset.e = "in";
+            clientCount.innerHTML = 0;
         }
     });
 
